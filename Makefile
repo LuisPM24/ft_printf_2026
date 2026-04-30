@@ -19,7 +19,13 @@ SRCS = ft_printf.c \
 	   printf_puthex.c
 BONUS_SRCS =	ft_printf_bonus.c \
 				start_parser_bonus.c \
-				parser_bonus.c
+				parser_bonus.c \
+				printf_putstr_bonus.c \
+				printf_putvoid_bonus.c \
+				printf_putnbr_bonus.c \
+				printf_putunnbr_bonus.c \
+				printf_puthex_bonus.c
+
 
 OBJS = $(SRCS:.c=.o)
 BONUS_OBJS = $(BONUS_SRCS:.c=.o)
