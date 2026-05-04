@@ -46,7 +46,7 @@ int	printf_putvoid_bonus(const void *ptr, t_format format)
 	len = ft_strlen(str);
 	if (!format.minus)
 		printed += manage_padding(format.width, len);
-	printed += printf_putstr(str);
+	printed += aux_printf_putstr_bonus(str);
 	if (format.minus)
 		printed += manage_padding(format.width, len);
 	return (printed);

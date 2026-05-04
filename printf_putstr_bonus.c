@@ -29,7 +29,7 @@ int	printf_putchar_bonus(char chr, t_format format)
 	printed = 0;
 	if (!format.minus)
 		printed += manage_padding(format.width, 1);
-	printed += printf_putchar(chr);
+	printed += aux_printf_putchar_bonus(chr);
 	if (format.minus)
 		printed += manage_padding(format.width, 1);
 	return (printed);
@@ -52,7 +52,7 @@ int	printf_putstr_bonus(char *str, t_format format)
 		printed += manage_padding(format.width, len);
 	while (str[count] && count < len)
 	{
-		printed += printf_putchar(str[count]);
+		printed += aux_printf_putchar_bonus(str[count]);
 		count++;
 	}
 	if (format.minus)
