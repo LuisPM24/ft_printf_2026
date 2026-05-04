@@ -6,7 +6,7 @@
 #    By: lupalomi <lupalomi@student.42malaga.c      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/28 09:54:53 by lupalomi          #+#    #+#              #
-#    Updated: 2026/04/28 18:45:21 by lupalomi         ###   ########.fr        #
+#    Updated: 2026/05/04 23:40:15 by lupalomi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,6 @@ BONUS_SRCS =	ft_printf_bonus.c \
 				manage_width_bonus.c \
 				start_parser_bonus.c \
 				parser_bonus.c \
-		        printf_text_functions.c \
 				printf_putstr_bonus.c \
 				printf_putvoid_bonus.c \
 				printf_putnbr_bonus.c \
