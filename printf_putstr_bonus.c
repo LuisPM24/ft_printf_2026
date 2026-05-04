@@ -39,15 +39,22 @@ int	printf_putstr_bonus(char *str, t_format format)
 {
 	int	printed;
 	int	len;
+	int	count;
 
 	printed = 0;
-	len = 0;
+	count = 0;
 	if (!str)
-		printf_putstr_bonus("(null)", format);
+		str = "(null)";
 	len = ft_strlen(str);
+	if (format.dot && format.precision < len)
+		len = format.precision;
 	if (!format.minus)
 		printed += manage_padding(format.width, len);
-	printed += printf_putstr(str);
+	while (str[count] && count < len)
+	{
+		printed += printf_putchar(str[count]);
+		count++;
+	}
 	if (format.minus)
 		printed += manage_padding(format.width, len);
 	return (printed);

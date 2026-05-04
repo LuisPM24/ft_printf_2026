@@ -12,40 +12,75 @@
 
 #include "ft_printf_bonus.h"
 
+static int	calc_size(unsigned int nbr)
+{
+	int	len;
+
+	len = 1;
+	while (nbr >= 16)
+	{
+		nbr /= 16;
+		len++;
+	}
+	return (len);
+}
+
+static int	calc_total_len(unsigned int nbr, t_format format,
+		int *amount_zero)
+{
+	int	size;
+	int	total_len;
+
+	size = calc_size(nbr);
+	*amount_zero = 0;
+	if (format.dot && format.precision > size)
+		*amount_zero = format.precision - size;
+	total_len = size + *amount_zero;
+	if (format.dot && format.precision == 0 && nbr == 0)
+		total_len = 0;
+	return (total_len);
+}
+
 int	printf_putlwrhex_bonus(unsigned int nbr, t_format format)
 {
-	char	buffer[9];
-	char	*hex_digits;
-	int		count;
+	int	printed;
+	int	amount_zero;
+	int	total_len;
 
-	hex_digits = "0123456789abcdef";
-	count = 8;
-	buffer[count] = '\0';
-	if (!nbr)
-		return (printf_putstr("0"));
-	while (nbr > 0)
+	printed = 0;
+	total_len = calc_total_len(nbr, format, &amount_zero);
+	if (!format.minus)
+		printed += manage_padding(format.width, total_len);
+	while (amount_zero > 0)
 	{
-		buffer[--count] = hex_digits[nbr % 16];
-		nbr /= 16;
+		printed += printf_putchar('0');
+		amount_zero--;
 	}
-	return (printf_putstr_bonus(&buffer[count], format));
+	if (!(format.dot && format.precision == 0 && nbr == 0))
+		printed += printf_putlwrhex(nbr);
+	if (format.minus)
+		printed += manage_padding(format.width, total_len);
+	return (printed);
 }
 
 int	printf_putupphex_bonus(unsigned int nbr, t_format format)
 {
-	char	buffer[9];
-	char	*hex_digits;
-	int		count;
+	int	printed;
+	int	amount_zero;
+	int	total_len;
 
-	hex_digits = "0123456789ABCDEF";
-	count = 8;
-	buffer[count] = '\0';
-	if (!nbr)
-		return (printf_putstr("0"));
-	while (nbr > 0)
+	printed = 0;
+	total_len = calc_total_len(nbr, format, &amount_zero);
+	if (!format.minus)
+		printed += manage_padding(format.width, total_len);
+	while (amount_zero > 0)
 	{
-		buffer[--count] = hex_digits[nbr % 16];
-		nbr /= 16;
+		printed += printf_putchar('0');
+		amount_zero--;
 	}
-	return (printf_putstr_bonus(&buffer[count], format));
+	if (!(format.dot && format.precision == 0 && nbr == 0))
+		printed += printf_putupphex(nbr);
+	if (format.minus)
+		printed += manage_padding(format.width, total_len);
+	return (printed);
 }
