@@ -35,15 +35,19 @@ static char	*hex_converter(char *buffer, unsigned long ptr)
 int	printf_putvoid_bonus(const void *ptr, t_format format)
 {
 	char	buffer[19];
-    int     printed;
+	char	*str;
+	int		printed;
+	int		len;
 
-    printed = 0;
+	printed = 0;
 	if (!ptr)
 		return (printf_putstr_bonus("(nil)", format));
-    if (!format.minus)
-		printed += manage_padding(format.width, 14);
-	printed += printf_putstr(hex_converter(buffer, (unsigned long)ptr));
-    if (format.minus)
-		printed += manage_padding(format.width, 14);
-    return (printed);
+	str = hex_converter(buffer, (unsigned long)ptr);
+	len = ft_strlen(str);
+	if (!format.minus)
+		printed += manage_padding(format.width, len);
+	printed += printf_putstr(str);
+	if (format.minus)
+		printed += manage_padding(format.width, len);
+	return (printed);
 }

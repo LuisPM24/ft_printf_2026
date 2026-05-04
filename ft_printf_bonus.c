@@ -60,15 +60,3 @@ int	ft_printf(char const *str, ...)
 	va_end(ap);
 	return (len);
 }
-
-#include <stdio.h>
-
-int main(void)
-{
-	unsigned int	aux;
-
-	aux = 42;
-	ft_printf("|%22x|\n", aux);
-	printf("|%22x|\n", aux);
-	return (0);
-}
