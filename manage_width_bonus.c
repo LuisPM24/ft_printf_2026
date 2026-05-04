@@ -24,3 +24,29 @@ int	manage_padding(int padd, int amount)
 	}
 	return (printed);
 }
+
+int	manage_padding_char(int width, int len, char c)
+{
+	int	printed;
+
+	printed = 0;
+	while (width > len)
+	{
+		printed += aux_printf_putchar_bonus(c);
+		width--;
+	}
+	return (printed);
+}
+
+int	print_zeroes(int amount_zero)
+{
+	int	printed;
+
+	printed = 0;
+	while (amount_zero > 0)
+	{
+		printed += aux_printf_putchar_bonus('0');
+		amount_zero--;
+	}
+	return (printed);
+}

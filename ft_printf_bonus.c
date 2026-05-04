@@ -29,7 +29,7 @@ static int	option_selector_bonus(va_list ap, t_format format)
 	if (format.chr == 'X')
 		return (printf_putupphex_bonus(va_arg(ap, unsigned int), format));
 	if (format.chr == '%')
-		return (printf_putchar_bonus('%', format));
+		return (aux_printf_putchar_bonus('%'));
 	return (0);
 }
 

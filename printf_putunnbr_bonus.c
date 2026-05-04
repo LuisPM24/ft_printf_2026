@@ -41,6 +41,17 @@ static int	calc_total_len(unsigned int nbr, t_format format,
 	return (total_len);
 }
 
+int	aux_printf_putunnbr_bonus(unsigned int nbr)
+{
+	int	len;
+
+	len = 0;
+	if (nbr >= 10)
+		len += aux_printf_putunnbr_bonus(nbr / 10);
+	len += aux_printf_putchar_bonus((nbr % 10) + '0');
+	return (len);
+}
+
 int	printf_putunnbr_bonus(unsigned int nbr, t_format format)
 {
 	int	printed;
@@ -49,15 +60,17 @@ int	printf_putunnbr_bonus(unsigned int nbr, t_format format)
 
 	printed = 0;
 	total_len = calc_total_len(nbr, format, &amount_zero);
-	if (!format.minus)
+	if (!format.minus && format.zero)
+		printed += manage_padding_char(format.width, total_len, '0');
+	else if (!format.minus)
 		printed += manage_padding(format.width, total_len);
 	while (amount_zero > 0)
 	{
-		printed += printf_putchar('0');
+		printed += aux_printf_putchar_bonus('0');
 		amount_zero--;
 	}
 	if (!(format.dot && format.precision == 0 && nbr == 0))
-		printed += printf_putunnbr(nbr);
+		printed += aux_printf_putunnbr_bonus(nbr);
 	if (format.minus)
 		printed += manage_padding(format.width, total_len);
 	return (printed);

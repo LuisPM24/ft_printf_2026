@@ -18,13 +18,17 @@ SRCS = ft_printf.c \
        printf_putunnbr.c \
 	   printf_puthex.c
 BONUS_SRCS =	ft_printf_bonus.c \
+				manage_width_bonus.c \
 				start_parser_bonus.c \
 				parser_bonus.c \
+		        printf_text_functions.c \
 				printf_putstr_bonus.c \
 				printf_putvoid_bonus.c \
 				printf_putnbr_bonus.c \
 				printf_putunnbr_bonus.c \
-				printf_puthex_bonus.c
+				printf_puthex_bonus.c \
+				printf_putper_bonus.c \
+				auxiliar_functions_bonus.c
 
 
 OBJS = $(SRCS:.c=.o)
@@ -35,7 +39,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
-bonus: $(BONUS_OBJS)
+bonus: $(OBJS) $(BONUS_OBJS)
 	ar rcs $(NAME) $(BONUS_OBJS)
 
 clean:

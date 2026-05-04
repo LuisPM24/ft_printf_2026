@@ -41,5 +41,14 @@ int		printf_putnbr_bonus(int nbr, t_format format);
 int		printf_putunnbr_bonus(unsigned int nbr, t_format format);
 int		printf_putlwrhex_bonus(unsigned int nbr, t_format format);
 int		printf_putupphex_bonus(unsigned int nbr, t_format format);
+int		printf_percent_bonus(t_format format);
+int		manage_padding_char(int width, int len, char c);
+int		print_zeroes(int amount_zero);
+int		aux_printf_putchar_bonus(const char chr);
+int		aux_printf_putstr_bonus(const char *str);
+int		aux_printf_putnbr_bonus(int nbr);
+int		aux_printf_putunnbr_bonus(unsigned int nbr);
+int		aux_printf_putlwrhex_bonus(unsigned int nbr);
+int		aux_printf_putupphex_bonus(unsigned int nbr);
 
 #endif
