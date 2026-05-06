@@ -13,7 +13,8 @@
 #ifndef FT_PRINTF_BONUS_H
 # define FT_PRINTF_BONUS_H
 
-# include "ft_printf.h"
+# include <unistd.h>
+# include <stdarg.h>
 
 typedef struct s_format
 {
@@ -29,11 +30,14 @@ typedef struct s_format
 }	t_format;
 
 // Bonus
+int		ft_printf(char const *str, ...);
 void	init_format(t_format *format);
 int		ft_strlen(const char *str);
 int		is_flag(char chr);
 void	parse_format(const char *str, int *pos, t_format *format);
 int		manage_padding(int padd, int amount);
+int		manage_padding_char(int padd, int amount, char c);
+int		print_zeroes(int amount_zero);
 int		printf_putchar_bonus(char chr, t_format format);
 int		printf_putstr_bonus(char *str, t_format format);
 int		printf_putvoid_bonus(const void *ptr, t_format format);
@@ -41,9 +45,6 @@ int		printf_putnbr_bonus(int nbr, t_format format);
 int		printf_putunnbr_bonus(unsigned int nbr, t_format format);
 int		printf_putlwrhex_bonus(unsigned int nbr, t_format format);
 int		printf_putupphex_bonus(unsigned int nbr, t_format format);
-int		printf_percent_bonus(t_format format);
-int		manage_padding_char(int width, int len, char c);
-int		print_zeroes(int amount_zero);
 int		aux_printf_putchar_bonus(const char chr);
 int		aux_printf_putstr_bonus(const char *str);
 int		aux_printf_putnbr_bonus(int nbr);

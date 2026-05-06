@@ -87,13 +87,13 @@ Para realizar este proyecto se ha recurido a las siguientes herramientas y pági
 
 Se requiere un compilador de C (como `cc`) y un sistema compatible con POSIX (Linux o macOS), ya que se utilizan cabeceras estándar como `<unistd.h>`.
 
-**Este proyecto ha usado IA generativa para generar un main de ejemplo para la parte bonus.**
+**Este proyecto no ha usado IA generativa.**
 
 # Bonus
 Este ejercicio contiene una **sección bonus** en la que se añade el uso de ***`flags`***:
 
 - ***`hash`***: Añade prefijo en hexadecimal.
-- ***`zero`***: Rellena con '0' en vez de con ' '.
+- ***`zero`***: Rellena con `0` en vez de con `espacios`.
 - ***`minus`***: Alinea a la izquierda una cantidad de carácteres.
 - ***`space`***: Añade un espacio delante de los positivos.
 - ***`plus`***: En caso de número positivo, indica el signo.
@@ -173,13 +173,6 @@ int	main(void)
 	ft_printf("|%#X|\n", 42);
 	printf("|%#X|\n\n", 42);
 
-	// Test 8
-	ft_printf("|%5%|\n");
-	printf("|%5%|\n");
-
-	ft_printf("|%05%|\n");
-	printf("|%05%|\n\n");
-
 	return (0);
 }
 ```
@@ -195,10 +188,233 @@ int	main(void)
 
 Este proyecto se divide en múltiples archivos y funciones que se resumen a continuación:
 
-## ft_printf.h
+## Parte Obligatoria
+### ft_printf.h
 
-Archivo cabecera (`header file`) en el que se incluyen todas las referencias a otras funciones. Se encuentra declarado en todos los archivos `.c` de este repositorio mediante la línea:
+Archivo cabecera (`header file`) en el que se incluyen todas las referencias a otras funciones de la parte obligatoria. Se encuentra declarado en todos los archivos `.c` de este repositorio mediante la línea:
 
 ```C
 #include "ft_printf.h"
 ```
+
+### ft_printf.c
+
+Contiene la función principal `ft_printf` que lanza el resto de funciones y devuelve un valor equivalente a la cantidad de carácteres impresos por pantalla.
+
+```C
+int	ft_printf(char const *str, ...);
+```
+
+### printf_putchar
+
+Imprime un carácter `char` por pantalla y devuelve un `1`, en caso de que se imprima, o un `0`, en caso de que no.
+
+```C
+int	printf_putchar(const char chr);
+```
+
+### printf_putstr
+
+Imprime una cadena de carácteres `char *` por pantalla y devuelve la cantidad de carácteres impresos en pantalla.
+
+```C
+int	printf_putstr(const char *str);
+```
+
+### printf_putvoid
+
+Imprime la dirección de memoria `void *` y devuelve la cantidad de carácteres impresos en pantalla.
+
+```C
+int	printf_putvoid(const void *ptr);
+```
+
+### printf_putnbr
+
+Imprime un número entero decimal `int` y devuelve la cantidad de carácteres impresos en pantalla.
+
+```C
+int	printf_putnbr(int nbr);
+```
+
+### printf_putunnbr
+
+Imprime un número decimal sin signo `unsigned int` y devuelve la cantidad de carácteres impresos en pantalla.
+
+```C
+int	printf_putunnbr(unsigned int nbr);
+```
+
+### printf_putlwrhex
+
+Imprime un número decimal sin signo `unsigned int` en un número hexadecimal, con carácteres en minúscula, y devuelve la cantidad de carácteres impresos en pantalla.
+
+```C
+int	printf_putlwrhex(unsigned int nbr);
+```
+
+### printf_putupphex
+
+Imprime un número decimal sin signo `unsigned int` en un número hexadecimal, con carácteres en mayúscula, y devuelve la cantidad de carácteres impresos en pantalla.
+
+```C
+int	printf_putupphex(unsigned int nbr);
+```
+
+## Parte Bonus
+
+### ft_printf_bonus.h
+
+Archivo cabecera (`header file`) en el que incluye todas las funciones de la parte bonus, una referencia a `ft_printf.h` y la estructura `t_format`:
+
+```C
+typedef struct s_format
+{
+	int		minus;
+	int		zero;
+	int		dot;
+	int		precision;
+	int		width;
+	int		hash;
+	int		space;
+	int		plus;
+	char	chr;
+}	t_format;
+```
+
+Se encuentra referenciado en todos los archivos de la parte bonus de la siguiente manera:
+
+```C
+#include "ft_printf_bonus.h"
+```
+
+### ft_printf_bonus.c
+
+Contiene la función principal `ft_printf` que lanza el resto de funciones, lanza un parser para el manejo de `flags`, `width` y `precision` y devuelve un valor equivalente a la cantidad de carácteres impresos por pantalla. **ATENCIÓN: ¡ESTA FUNCIÓN SOLAPA A LA PARTE OBLIGATORIA POR LO QUE SE HA DE EJECUTAR DE MANERA SEPARADA!**
+
+```C
+int	ft_printf(char const *str, ...);
+```
+
+### init_format
+
+Función que se usa para inicializar todos los valores de un formato `t_format` a `0`.
+
+```C
+void	init_format(t_format *format);
+```
+
+### ft_strlen
+
+Devuelve la longitud de la cadena `char *`.
+
+```C
+int		ft_strlen(const char *str);
+```
+
+### is_flag
+
+Devuelve `1` en caso de que el carácter `char` pasado corresponda con una `flag`. En caso contrario, devuelve `0`.
+
+```C
+int		is_flag(char chr);
+```
+
+### parse_format
+
+Función que se encarga de rellenar y completar un formato `t_format` con los valores otorgados por el usuario mediante la cadena de carácteres `char *`.
+
+```C
+void	parse_format(const char *str, int *pos, t_format *format);
+```
+
+### manage_padding
+
+Imprime una cantidad de espacios `width` y devuelve la cantidad impresa.
+
+```C
+int		manage_padding(int padd, int amount);
+```
+
+### manage_padding_char
+
+Imprime una cantidad de caráctes `char` y devuelve la cantidad impresa.
+
+```C
+int		manage_padding_char(int padd, int amount, char c);
+```
+
+### print_zeroes
+
+Imprime la cantidad `int` de `0` y devuelve la cantidad impresa.
+
+```C
+int		print_zeroes(int amount_zero);
+```
+
+### printf_putchar_bonus
+
+Versión bonus de la función obligatoria **`printf_putchar`**. Esta función también maneja la `flag` `minus` y el uso de `width`.
+
+```C
+int		printf_putchar_bonus(char chr, t_format format);
+```
+
+### printf_putstr_bonus
+
+Versión bonus de la función obligatoria **`printf_putstr`**. Esta función también maneja la `flag` `minus` y el uso de `width` y `precision`.
+
+```C
+int		printf_putstr_bonus(char *str, t_format format);
+```
+
+### printf_putvoid_bonus
+
+Versión bonus de la función obligatoria **`printf_putvoid`**. Esta función también maneja la `flag` `minus` y el uso de `width`.
+
+```C
+int		printf_putvoid_bonus(const void *ptr, t_format format);
+```
+
+### printf_putnbr_bonus
+
+Versión bonus de la función obligatoria **`printf_putnbr`**. Esta función maneja el los `flags` `minus`, `space`, `plus` y `zero` junto con el `width` y la `precision`.
+
+```C
+int		printf_putnbr_bonus(int nbr, t_format format);
+```
+
+### printf_putunnbr_bonus
+
+Versión bonus de la función obligatoria **`printf_putunnbr`**. Esta función maneja el los `flags` `minus` y `zero` junto con el `width` y la `precision`.
+
+```C
+int		printf_putunnbr_bonus(unsigned int nbr, t_format format);
+```
+
+### printf_putlwrhex_bonus
+
+Versión bonus de la función obligatoria **`printf_putlwrhex`**. Esta función maneja el los `flags` `minus`, `zero` y `hash` junto con el `width` y la `precision`.
+
+```C
+int		printf_putlwrhex_bonus(unsigned int nbr, t_format format);
+```
+
+### printf_putupphex_bonus
+
+Versión bonus de la función obligatoria **`printf_putupphex`**. Esta función maneja el los `flags` `minus`, `zero` y `hash` junto con el `width` y la `precision`.
+
+```C
+int		printf_putupphex_bonus(unsigned int nbr, t_format format);
+```
+
+### Funciones aux
+Las `funciones aux` son exactamente iguales a sus versiones originales **(ver tabla de equivalencias)**. La razón de estas funciones es que la parte bonus impide comunicar las funciones obligatorias 
+
+#### Tabla de equivalencias
+- `aux_printf_putchar_bonus` --> `printf_putchar`
+- `aux_printf_putstr_bonus` --> `printf_putstr`
+- `aux_printf_putnbr_bonus` --> `printf_putnbr`
+- `aux_printf_putunnbr_bonus` --> `printf_putunnbr`
+- `aux_printf_putlwrhex_bonus` --> `printf_putlwrhex`
+- `aux_printf_putupphex_bonus` --> `printf_putupphex`

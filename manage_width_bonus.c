@@ -25,15 +25,15 @@ int	manage_padding(int padd, int amount)
 	return (printed);
 }
 
-int	manage_padding_char(int width, int len, char c)
+int	manage_padding_char(int padd, int amount, char c)
 {
 	int	printed;
 
 	printed = 0;
-	while (width > len)
+	while (padd > amount)
 	{
 		printed += aux_printf_putchar_bonus(c);
-		width--;
+		padd--;
 	}
 	return (printed);
 }

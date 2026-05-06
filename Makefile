@@ -26,7 +26,6 @@ BONUS_SRCS =	ft_printf_bonus.c \
 				printf_putnbr_bonus.c \
 				printf_putunnbr_bonus.c \
 				printf_puthex_bonus.c \
-				printf_putper_bonus.c \
 				auxiliar_functions_bonus.c
 
 
