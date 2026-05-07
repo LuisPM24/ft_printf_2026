@@ -43,13 +43,16 @@ int	printf_putstr_bonus(char *str, t_format format)
 
 	printed = 0;
 	count = 0;
-	if (!str)
-		return (aux_printf_putstr_bonus("(null)"));
 	len = ft_strlen(str);
 	if (format.dot && format.precision < len)
 		len = format.precision;
 	if (!format.minus)
 		printed += manage_padding(format.width, len);
+	if (!str)
+	{
+		printed += aux_printf_putstr_bonus("(null)");
+		return (printed);
+	}
 	while (str[count] && count < len)
 	{
 		printed += aux_printf_putchar_bonus(str[count]);

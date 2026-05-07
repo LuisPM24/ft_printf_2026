@@ -41,8 +41,9 @@ int	printf_putvoid_bonus(const void *ptr, t_format format)
 
 	printed = 0;
 	if (!ptr)
-		return (aux_printf_putstr_bonus("(nil)"));
-	str = hex_converter(buffer, (unsigned long)ptr);
+		str = "(nil)";
+	else
+		str = hex_converter(buffer, (unsigned long)ptr);
 	len = ft_strlen(str);
 	if (!format.minus)
 		printed += manage_padding(format.width, len);
