@@ -44,7 +44,7 @@ int	printf_putstr_bonus(char *str, t_format format)
 	printed = 0;
 	count = 0;
 	if (!str)
-		str = "(null)";
+		return (aux_printf_putstr_bonus("(null)"));
 	len = ft_strlen(str);
 	if (format.dot && format.precision < len)
 		len = format.precision;

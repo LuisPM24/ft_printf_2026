@@ -50,11 +50,10 @@ int	ft_printf(char const *str, ...)
 			parse_format(str, &position, &format);
 			len += option_selector_bonus(ap, format);
 		}
+		else if (str[position] == '%' && !str[position + 1])
+			return (-1);
 		else
-		{
-			write(1, &str[position], 1);
-			len++;
-		}
+			len += aux_printf_putchar_bonus(str[position]);
 		position++;
 	}
 	va_end(ap);
